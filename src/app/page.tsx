@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-
 import {
   Button,
   TextField,
@@ -38,7 +37,8 @@ const modelOptions = [
 ];
 
 export default function Home() {
-  const { text, emotion, model, setText, setEmotion, setModel } = useEmotionStore();
+  const { text, emotion, model, setText, setEmotion, setModel } =
+    useEmotionStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,8 +70,21 @@ export default function Home() {
 
   return (
     <Container maxWidth="sm">
-      <Box display="flex" flexDirection="column" alignItems="center" gap={3} py={5}>
-        <Typography variant="h4">Определение эмоции</Typography>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={3}
+        py={5}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            color: (theme) => theme.palette.text.primary,
+          }}
+        >
+          Определение эмоции
+        </Typography>
 
         <TextField
           fullWidth
@@ -82,7 +95,11 @@ export default function Home() {
 
         <FormControl fullWidth>
           <InputLabel>Выберите модель</InputLabel>
-          <Select value={model} label="Выберите модель" onChange={(e) => setModel(e.target.value as ModelId)}>
+          <Select
+            value={model}
+            label="Выберите модель"
+            onChange={(e) => setModel(e.target.value as ModelId)}
+          >
             {modelOptions.map((opt) => (
               <MenuItem key={opt.value} value={opt.value}>
                 {opt.label}
@@ -97,7 +114,11 @@ export default function Home() {
           onClick={handleAnalyze}
           disabled={loading || !text}
         >
-          {loading ? <CircularProgress size={24} color="inherit" /> : "Анализировать"}
+          {loading ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Анализировать"
+          )}
         </Button>
 
         {emotion && (
@@ -114,4 +135,3 @@ export default function Home() {
     </Container>
   );
 }
-
