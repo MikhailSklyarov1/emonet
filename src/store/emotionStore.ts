@@ -5,23 +5,28 @@ export type ModelId =
   | "google/gemini-2.5-pro-exp-03-25:free"
   | "mistralai/mistral-small-3.1-24b-instruct:free";
 
+export type Lang = "ru" | "en";
+
 type EmotionStore = {
   text: string;
   emotion: string | null;
   model: ModelId;
+  lang: Lang;
   setText: (text: string) => void;
   setEmotion: (emotion: string | null) => void;
   setModel: (model: ModelId) => void;
+  setLang: (lang: Lang) => void;
 };
 
 const useEmotionStore = create<EmotionStore>((set) => ({
   text: "",
   emotion: null,
   model: "deepseek/deepseek-r1-distill-qwen-32b:free",
+  lang: "ru",
   setText: (text) => set({ text }),
   setEmotion: (emotion) => set({ emotion }),
   setModel: (model) => set({ model }),
+  setLang: (lang) => set({ lang }),
 }));
 
 export default useEmotionStore;
-

@@ -15,7 +15,7 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
-import useEmotionStore, { ModelId } from "@/store/emotionStore";
+import useEmotionStore, { Lang, ModelId } from "@/store/emotionStore";
 
 const modelOptions = [
   {
@@ -37,7 +37,7 @@ const modelOptions = [
 ];
 
 export default function Home() {
-  const { text, emotion, model, setText, setEmotion, setModel } =
+  const { text, emotion, model, lang, setText, setEmotion, setModel, setLang } =
     useEmotionStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +51,7 @@ export default function Home() {
       const res = await fetch("http://localhost:5000/api/emotion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, model }),
+        body: JSON.stringify({ text, model, lang }),
       });
 
       const data = await res.json();
@@ -86,18 +86,27 @@ export default function Home() {
           Определение эмоции
         </Typography>
 
-        <TextField
-          fullWidth
-          label="Введите текст"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-
         <FormControl fullWidth>
           <InputLabel>Выберите модель</InputLabel>
           <Select
-            value={model}
+            value={lang}
             label="Выберите модель"
+            onChange={(e) => setLang(e.target.value as Lang)}
+          >
+            <MenuItem key={"ru"} value={"ru"}>
+              {"Русский"}
+            </MenuItem>
+            <MenuItem key={"en"} value={"en"}>
+              {"English"}
+            </MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel>Выберите язык</InputLabel>
+          <Select
+            value={model}
+            label="Выберите язык"
             onChange={(e) => setModel(e.target.value as ModelId)}
           >
             {modelOptions.map((opt) => (
@@ -107,6 +116,15 @@ export default function Home() {
             ))}
           </Select>
         </FormControl>
+
+        <TextField
+          fullWidth
+          label="Введите текст"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          multiline
+          rows={4}
+        />
 
         <Button
           variant="contained"
