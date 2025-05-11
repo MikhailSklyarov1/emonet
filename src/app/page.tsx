@@ -37,7 +37,7 @@ const modelOptions = [
 ];
 
 export default function Home() {
-  const { text, emotion, model, lang, setText, setEmotion, setModel, setLang } =
+  const { text, emotion, model, lang, votes, setText, setEmotion, setModel, setLang, setVotes } =
     useEmotionStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +45,7 @@ export default function Home() {
   const handleAnalyze = async () => {
     setLoading(true);
     setEmotion(null);
+    setVotes(null);
     setError(null);
 
     try {
@@ -58,6 +59,7 @@ export default function Home() {
 
       if (res.ok) {
         setEmotion(data.emotion);
+        setVotes(data.votes);
       } else {
         setError(data.error || "Ошибка при анализе текста");
       }
@@ -139,10 +141,24 @@ export default function Home() {
           )}
         </Button>
 
-        {emotion && (
-          <Alert severity="success" sx={{ width: "100%", textAlign: "center" }}>
-            Эмоция: <strong>{emotion}</strong>
-          </Alert>
+        {emotion && votes && votes?.length > 0 && (
+          <Box width="100%">
+          <Typography variant="h6" gutterBottom>
+            Детали голосования:
+          </Typography>
+          {votes.map((vote, index) => (
+            <Alert
+              key={index}
+              severity="info"
+              sx={{ mb: 1, justifyContent: "space-between" }}
+            >
+              Модель: <strong>{vote.model}</strong> — Эмоция:{" "}
+              <strong>{vote.emotion}</strong> — Категория:{" "}
+              <strong>{vote.category}</strong> — Вес:{" "}
+              <strong>{vote.weight}</strong>
+            </Alert>
+          ))}
+        </Box>
         )}
         {error && (
           <Alert severity="error" sx={{ width: "100%", textAlign: "center" }}>
