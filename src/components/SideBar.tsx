@@ -20,9 +20,9 @@ export default function SideBar({ children }: { children: ReactNode }) {
   const menuItems = [
     { label: "Главная", key: "/", onClick: () => router.push("/") },
     {
-      label: "Настройки",
-      key: "/settings",
-      onClick: () => router.push("/settings"),
+      label: "Информация",
+      key: "/info",
+      onClick: () => router.push("/info"),
     },
   ];
 

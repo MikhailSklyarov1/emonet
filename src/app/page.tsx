@@ -90,7 +90,8 @@ export default function Home() {
         setEmotion(data.emotion);
         setVotes(data.votes);
       } else {
-        setError(data.error || "Ошибка при анализе текста");
+        // setError(data.error || "Ошибка при анализе текста");
+        setError("Ошибка при анализе текста");
       }
     } catch {
       setError("Ошибка подключения к серверу");
