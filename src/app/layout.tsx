@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/SideBar";
+import { ThemeRegistry } from "@/components/ThemeRegistry";
 
 // Шрифты
 const geistSans = Geist({
@@ -28,10 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`} style={{backgroundColor: "#FFFFFF"}}>
-        <SideBar>
-        {children}
-        </SideBar>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{ backgroundColor: "#FFFFFF" }}
+      >
+        <ThemeRegistry>
+          <SideBar>{children}</SideBar>
+        </ThemeRegistry>
       </body>
     </html>
   );

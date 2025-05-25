@@ -16,6 +16,7 @@ export default function EmotionResult({ emotion }: Props) {
         textAlign: "center",
         boxShadow: 1,
         fontWeight: "bold",
+        color: (theme) => theme.palette.text.primary
       }}
     >
       Итоговая эмоция: <span style={{ fontSize: "1.2em" }}>{emotion}</span>

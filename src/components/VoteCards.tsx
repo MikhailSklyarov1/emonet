@@ -46,6 +46,7 @@ export default function VoteCards({ votes }: Props) {
             minWidth: "220px",
             maxWidth: "300px",
             textAlign: "center",
+            color: (theme) => theme.palette.text.primary
           }}
         >
           <div><strong>Модель:</strong> {vote.model}</div>
