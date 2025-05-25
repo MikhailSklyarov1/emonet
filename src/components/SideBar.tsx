@@ -11,11 +11,17 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export default function SideBar({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { theme, switchTheme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const menuItems = [
     { label: "Главная", key: "/", onClick: () => router.push("/") },

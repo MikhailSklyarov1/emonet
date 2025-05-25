@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <Container maxWidth="md">
       <Box display="flex" flexDirection="column" alignItems="center" gap={3} py={5}>
-        <Typography variant="h4">Определение эмоции</Typography>
+        <Typography variant="h4" sx={{color: (theme) => theme.palette.text.primary}}>Определение эмоции</Typography>
 
         <EmotionInputForm
           text={text}
@@ -80,7 +80,7 @@ export default function Home() {
         />
 
         {emotion && votes && votes.length > 0 && (
-          <Box display="flex" flexDirection="column" gap={2} width="100%" alignItems="center">
+          <Box key={emotion+"_"+votes.length} display="flex" flexDirection="column" gap={2} width="100%" alignItems="center">
             <EmotionResult emotion={emotion} />
             <VoteCards votes={votes} />
           </Box>

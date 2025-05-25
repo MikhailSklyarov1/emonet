@@ -1,3 +1,4 @@
+"use client";
 import { Vote } from "@/store/emotionStore";
 import { Box } from "@mui/material";
 
@@ -33,7 +34,7 @@ export default function VoteCards({ votes }: Props) {
     <Box display="flex" gap={2} flexWrap="wrap" justifyContent="center" width="100%">
       {votes.map((vote, index) => (
         <Box
-          key={index}
+          key={vote.emotion + index}
           sx={{
             borderRadius: 2,
             borderColor: getBorderColor(vote.category),

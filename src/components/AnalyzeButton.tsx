@@ -1,3 +1,4 @@
+"use client";
 import { Button, CircularProgress } from "@mui/material";
 
 interface Props {
